@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar color="dark">
+
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Add User</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-item lines="none" text-right>
+    <ion-thumbnail slot="start">
+      <img [src]="avatarLink">
+    </ion-thumbnail>
+    <ion-button color="light" slot="end" (click)="presentModal()">Edit avatar</ion-button>
+  </ion-item>
+
+
+  <form [formGroup]="exampleForm" novalidate (ngSubmit)="onSubmit(exampleForm.value)" no-padding>
+    <ion-item>
+      <ion-label position="floating">Name</ion-label>
+      <ion-input type="text" formControlName="name" placeholder="Name" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Surname</ion-label>
+      <ion-input type="text" formControlName="surname" placeholder="Surname" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Age</ion-label>
+      <ion-input type="number" min="0" max="100" placeholder="Age" class="form-control" formControlName="age" required></ion-input>
+    </ion-item>
+
+    <ion-button margin-top
+                color="primary"
+                expand="block"
+                [disabled]="!exampleForm.valid"
+                type="submit">Add</ion-button>
+
+    <ion-button
+            color="medium"
+            expand="block"
+            (click)="resetFields()">Reset</ion-button>
+  </form>
+
+
+</ion-content>
+

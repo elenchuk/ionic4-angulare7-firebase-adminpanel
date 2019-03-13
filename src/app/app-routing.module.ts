@@ -1,9 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { HomeComponent } from './home/home.component';
+import { NewUserComponent } from './new-user/new-user.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
+import { EditUserResolver } from './edit-user/edit-user.resolver';
+
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', loadChildren: './home/home.module#HomePageModule' },
+  { path: '', component: HomeComponent },
+  { path: 'new-user', component: NewUserComponent },
+  { path: 'details/:id', component: EditUserComponent, resolve: {data : EditUserResolver} }
 ];
 
 @NgModule({

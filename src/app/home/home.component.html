@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar color="dark">
+
+    <ion-title>Admin Panel</ion-title>
+
+
+    <ion-buttons slot="end">
+      <ion-icon name="funnel" (click)="showFilter()"></ion-icon>
+    </ion-buttons>
+
+  </ion-toolbar>
+  <ion-toolbar *ngIf="isshowFilter">
+    <ion-searchbar [(ngModel)]="searchValue" [ngModelOptions]="{standalone: true}" placeholder="Search by name..." (keyup)="searchByName()"></ion-searchbar>
+  </ion-toolbar>
+  <ion-toolbar *ngIf="isshowFilter">
+    <ion-list>
+      <ion-list-header>
+        Filter by age
+      </ion-list-header>
+      <ion-item lines="none">
+        <ion-range
+                color="danger"
+                min="0"
+                max="100"
+                (ngModel)="ageValue"
+                (ionChange)="rangeChange($event)"></ion-range>
+      </ion-item>
+    </ion-list>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item *ngFor="let item of items" lines="full">
+  <ion-avatar slot="start">
+    <img [src]="item.payload.doc.data().avatar">
+  </ion-avatar>
+  <ion-label>
+    <h2>{{item.payload.doc.data().name}} {{item.payload.doc.data().surname}}</h2>
+    <p>Age: {{item.payload.doc.data().age}}</p>
+  </ion-label>
+  <ion-button fill="outline" slot="end" (click)="viewDetails(item)">edit</ion-button>
+</ion-item>
+
+</ion-content>
+
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button color="dark">
+    <ion-icon name="add" routerLink="/new-user"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
